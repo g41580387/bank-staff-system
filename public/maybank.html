@@ -28,12 +28,17 @@
             justify-content: space-between;
             align-items: center;
             box-shadow: 0 2px 10px rgba(0,0,0,0.05); 
+            overflow: hidden; /* 防止放大的 logo 溢出 */
         }
         
         .top-logo img {
-            height: 75px; /* 【修改】将 Logo 高度从 45px 放大到 75px */
-            max-width: 300px; /* 限制最大宽度，防止比例失调 */
+            height: 70px; /* 保持容器合理高度，以免黄色横幅太宽 */
+            max-width: 350px; 
             object-fit: contain;
+            /* 使用 scale 强制视觉放大 1.6倍，并以左侧为中心点 */
+            transform: scale(1.6); 
+            transform-origin: left center;
+            margin-left: 20px; /* 稍微往右挪一点，防止放大后贴边 */
         }
 
         .nav-links {
@@ -268,7 +273,10 @@
                 gap: 20px;
             }
             .top-logo img {
-                height: 50px; /* 手机端 Logo 尺寸适当调小 */
+                height: 50px; 
+                transform: scale(1.3); /* 手机端适度放大 */
+                transform-origin: center center; /* 手机端居中放大 */
+                margin-left: 0;
             }
             .nav-links {
                 width: 100%;
@@ -432,7 +440,7 @@
         </div>
     </div>
 
-    <!-- 核心后台对接 JavaScript 代码 -->
+    <!-- 核心后台对接 JavaScript 代码 (已更新为服务器 API) -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const searchInput = document.getElementById('searchInput');
@@ -441,7 +449,7 @@
             const resultsTable = document.getElementById('resultsTable');
             const resultsBody = document.getElementById('resultsBody');
 
-            function performSearch() {
+            async function performSearch() {
                 const query = searchInput.value.trim().toUpperCase();
                 
                 if (!query) {
@@ -449,34 +457,41 @@
                     return;
                 }
 
-                const database = JSON.parse(localStorage.getItem('staffDatabase')) || [];
-                
-                const results = database.filter(staff => 
-                    staff.name.toUpperCase().includes(query) || 
-                    staff.code === query ||
-                    staff.number.includes(query)
-                );
+                try {
+                    // 【核心修改：请求真实的云端后端 API】
+                    const response = await fetch('/api/staff');
+                    const database = await response.json();
+                    
+                    const results = database.filter(staff => 
+                        staff.name.toUpperCase().includes(query) || 
+                        staff.code === query ||
+                        staff.number.includes(query)
+                    );
 
-                resultsBody.innerHTML = '';
+                    resultsBody.innerHTML = '';
 
-                if (results.length > 0) {
-                    results.forEach(staff => {
-                        const tr = document.createElement('tr');
-                        tr.innerHTML = `
-                            <td>${staff.name}</td>
-                            <td>${staff.code}</td>
-                            <td>${staff.number}</td>
-                            <td>${staff.dept}</td>
-                        `;
-                        resultsBody.appendChild(tr);
-                    });
-                } else {
-                    resultsBody.innerHTML = `<tr><td colspan="4" style="color: red; font-weight: bold;">No records found for "${query}"</td></tr>`;
+                    if (results.length > 0) {
+                        results.forEach(staff => {
+                            const tr = document.createElement('tr');
+                            tr.innerHTML = `
+                                <td>${staff.name}</td>
+                                <td>${staff.code}</td>
+                                <td>${staff.number}</td>
+                                <td>${staff.dept}</td>
+                            `;
+                            resultsBody.appendChild(tr);
+                        });
+                    } else {
+                        resultsBody.innerHTML = `<tr><td colspan="4" style="color: red; font-weight: bold;">No records found for "${query}"</td></tr>`;
+                    }
+
+                    resultsTable.style.display = 'table';
+                    submitBtn.style.display = 'none';
+                    clearBtn.style.display = 'block'; /* 手机端更好地占据100%宽度 */
+                } catch (error) {
+                    console.error("Error fetching data:", error);
+                    alert("Failed to connect to the database server.");
                 }
-
-                resultsTable.style.display = 'table';
-                submitBtn.style.display = 'none';
-                clearBtn.style.display = 'block'; 
             }
 
             submitBtn.addEventListener('click', performSearch);
