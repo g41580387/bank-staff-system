@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank Internal System Portal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7f6;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .portal-container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 800px;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 24px;
+        }
+        .bank-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        
+        /* 更新后的卡片样式：去除彩色，改为干净的白底+浅色边框 */
+        .bank-card {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+            height: 70px; 
+            background-color: #ffffff; /* 干净的白底 */
+            border: 1px solid #eaeaea; /* 淡淡的边框 */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05); /* 微微的立体阴影 */
+        }
+
+        .bank-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.15); /* 鼠标放上去悬浮效果加强 */
+            border-color: #ccc;
+        }
+
+        /* 控制里面图片的大小 */
+        .bank-card img {
+            max-width: 90%;
+            max-height: 50px;
+            object-fit: contain;
+        }
+        
+        .admin-link {
+            display: inline-block;
+            margin-top: 40px;
+            color: #0072c6;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        .admin-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="portal-container">
+        <h1>Internal Staff Database Portal</h1>
+        
+        <div class="bank-grid">
+            <!-- 直接展示图片，去掉了原本的颜色 class -->
+            <a href="rhb.html" class="bank-card">
+                <img src="img/Rhb.png" alt="RHB">
+            </a>
+            <a href="maybank.html" class="bank-card">
+                <img src="img/Maybank.png" alt="MAYBANK">
+            </a>
+            <a href="hongleong.html" class="bank-card">
+                <img src="img/HongLeong.png" alt="HONG LEONG">
+            </a>
+            <a href="cimb.html" class="bank-card">
+                <img src="img/cimb.png" alt="CIMB">
+            </a>
+            <a href="publicbank.html" class="bank-card">
+                <img src="img/PublicBank.svg" alt="PUBLIC BANK">
+            </a>
+        </div>
+
+        <a href="admin.html" class="admin-link">Go to Admin Backend Panel &rarr;</a>
+    </div>
+
+</body>
+</html>

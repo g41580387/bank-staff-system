@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Backend - Staff Data Entry</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #eef2f5;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+        .header h2 {
+            margin: 0;
+            color: #333;
+        }
+        .header a {
+            color: #0072c6;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        /* 表单样式 */
+        .form-group {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        .input-box {
+            flex: 1;
+            min-width: 200px;
+        }
+        .input-box label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+            font-size: 14px;
+        }
+        .input-box input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+        button.save-btn {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        button.save-btn:hover {
+            background-color: #218838;
+        }
+        button.clear-btn {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+
+        /* 表格样式 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+            font-size: 14px;
+        }
+        th {
+            background-color: #1a1a1a;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .delete-btn {
+            color: red;
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <h2>Backend System - Add Staff Record</h2>
+            <a href="index.html">&larr; Back to Main Portal</a>
+        </div>
+
+        <!-- 录入表单 -->
+        <form id="staffForm">
+            <div class="form-group">
+                <div class="input-box">
+                    <label>Name (名字)</label>
+                    <input type="text" id="staffName" placeholder="e.g. WONG HUI YI" required>
+                </div>
+                <div class="input-box">
+                    <label>Staff Code (员工ID)</label>
+                    <input type="text" id="staffCode" placeholder="e.g. 455986" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-box">
+                    <label>Mobile Number (手机号码)</label>
+                    <input type="text" id="staffNumber" placeholder="e.g. +60 10-204 8405" required>
+                </div>
+                <div class="input-box">
+                    <label>Department (部门)</label>
+                    <input type="text" id="staffDept" placeholder="e.g. Seri Kembangan" required>
+                </div>
+            </div>
+            <button type="submit" class="save-btn">Save Data</button>
+            <button type="button" class="clear-btn" onclick="clearAllData()">Clear All Records</button>
+        </form>
+
+        <!-- 数据展示表格 -->
+        <table>
+            <thead>
+                <tr>
+                    <th>NAME</th>
+                    <th>STAFF ID / CODE</th>
+                    <th>MOBILE NUMBER</th>
+                    <th>DEPARTMENT</th>
+                    <th>ACTION</th>
+                </tr>
+            </thead>
+            <tbody id="dataTableBody">
+                <!-- 数据将通过 JavaScript 动态加载到这里 -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 真实后端对接脚本 -->
+    <script>
+        const form = document.getElementById('staffForm');
+        const tableBody = document.getElementById('dataTableBody');
+
+        // 1. 从真实后端获取数据并渲染表格
+        async function loadData() {
+            try {
+                const response = await fetch('/api/staff');
+                const data = await response.json();
+                renderTable(data);
+            } catch (error) {
+                console.error('Error loading data:', error);
+            }
+        }
+
+        // 渲染表格的函数
+        function renderTable(data) {
+            tableBody.innerHTML = '';
+            data.forEach((staff, index) => {
+                const row = `
+                    <tr>
+                        <td style="color:#0072c6; font-weight:bold;">${staff.name}</td>
+                        <td>${staff.code}</td>
+                        <td>${staff.number}</td>
+                        <td>${staff.dept}</td>
+                        <td><button class="delete-btn" onclick="deleteRecord(${index})">Delete</button></td>
+                    </tr>
+                `;
+                tableBody.insertAdjacentHTML('beforeend', row);
+            });
+        }
+
+        // 2. 提交表单：将数据发送给后端保存
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const newStaff = {
+                name: document.getElementById('staffName').value.toUpperCase(),
+                code: document.getElementById('staffCode').value,
+                number: document.getElementById('staffNumber').value,
+                dept: document.getElementById('staffDept').value
+            };
+
+            await fetch('/api/staff', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(newStaff)
+            });
+
+            form.reset(); 
+            loadData(); // 重新向服务器获取最新数据刷新表格
+        });
+
+        // 3. 删除单条记录
+        async function deleteRecord(index) {
+            if(confirm("Delete this record?")) {
+                await fetch(`/api/staff/${index}`, { method: 'DELETE' });
+                loadData();
+            }
+        }
+
+        // 4. 清空所有记录
+        async function clearAllData() {
+            if(confirm("Are you sure you want to clear ALL records in the database?")) {
+                await fetch('/api/staff-clear', { method: 'DELETE' });
+                loadData();
+            }
+        }
+
+        // 页面加载时自动向服务器请求最新数据
+        loadData();
+    </script>
+
+</body>
+</html>
