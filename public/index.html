@@ -14,6 +14,54 @@
             align-items: center;
             height: 100vh;
         }
+        
+        /* 登录框样式 */
+        .login-container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 350px;
+            text-align: center;
+        }
+        .login-container h1 {
+            margin-bottom: 20px;
+            font-size: 22px;
+            color: #333;
+        }
+        .login-container input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+        .login-container button {
+            width: 100%;
+            padding: 12px;
+            background-color: #0072c6;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+            transition: background-color 0.2s;
+        }
+        .login-container button:hover {
+            background-color: #005a9e;
+        }
+        .error-msg {
+            color: #d93025;
+            font-size: 14px;
+            display: none;
+            margin-top: 15px;
+        }
+
+        /* 原有内部系统样式 */
         .portal-container {
             background-color: white;
             padding: 40px;
@@ -22,6 +70,7 @@
             width: 100%;
             max-width: 800px;
             text-align: center;
+            display: none; /* 初始状态设为隐藏 */
         }
         h1 {
             color: #333;
@@ -33,8 +82,6 @@
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 20px;
         }
-        
-        /* 更新后的卡片样式：去除彩色，改为干净的白底+浅色边框 */
         .bank-card {
             display: flex;
             flex-direction: column;
@@ -46,24 +93,20 @@
             transition: transform 0.2s, box-shadow 0.2s;
             cursor: pointer;
             height: 70px; 
-            background-color: #ffffff; /* 干净的白底 */
-            border: 1px solid #eaeaea; /* 淡淡的边框 */
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05); /* 微微的立体阴影 */
+            background-color: #ffffff;
+            border: 1px solid #eaeaea;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
-
         .bank-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 6px 15px rgba(0,0,0,0.15); /* 鼠标放上去悬浮效果加强 */
+            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
             border-color: #ccc;
         }
-
-        /* 控制里面图片的大小 */
         .bank-card img {
             max-width: 90%;
             max-height: 50px;
             object-fit: contain;
         }
-        
         .admin-link {
             display: inline-block;
             margin-top: 40px;
@@ -78,7 +121,17 @@
 </head>
 <body>
 
-    <div class="portal-container">
+    <!-- 1. 登录区域 -->
+    <div class="login-container" id="loginContainer">
+        <h1>System Login</h1>
+        <input type="text" id="username" placeholder="Username (默认: admin)">
+        <input type="password" id="password" placeholder="Password (默认: 123456)">
+        <button onclick="checkLogin()">Login</button>
+        <div class="error-msg" id="errorMsg">账号或密码错误，请重试。(Invalid credentials)</div>
+    </div>
+
+    <!-- 2. 内部系统区域 (默认隐藏) -->
+    <div class="portal-container" id="portalContainer">
         <h1>Internal Staff Database Portal</h1>
         
         <div class="bank-grid">
@@ -109,6 +162,37 @@
 
         <a href="admin.html" class="admin-link">Go to Admin Backend Panel &rarr;</a>
     </div>
+
+    <!-- 3. JavaScript 登录验证逻辑 -->
+    <script>
+        function checkLogin() {
+            var user = document.getElementById("username").value;
+            var pass = document.getElementById("password").value;
+            var errorMsg = document.getElementById("errorMsg");
+            
+            // 在这里设置允许登入的账号和密码
+            var validUsername = "admin";
+            var validPassword = "123456";
+
+            if (user === validUsername && pass === validPassword) {
+                // 验证成功：隐藏登录框，显示内部系统
+                document.getElementById("loginContainer").style.display = "none";
+                document.getElementById("portalContainer").style.display = "block";
+                errorMsg.style.display = "none"; // 清除错误提示
+            } else {
+                // 验证失败：显示错误提示
+                errorMsg.style.display = "block";
+            }
+        }
+
+        // 允许用户按 Enter 键触发登录
+        document.getElementById("password").addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                checkLogin();
+            }
+        });
+    </script>
 
 </body>
 </html>
