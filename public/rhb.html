@@ -159,7 +159,7 @@
         .btn-clear { background-color: #cc8449; }
 
         /* =======================================================
-           【新增】加载圈圈动画样式 
+           加载圈圈动画样式 
            ======================================================= */
         .loader-container {
             display: none; /* 默认隐藏 */
@@ -376,7 +376,7 @@
             <button id="clearBtn" class="btn-clear" style="display:none;">Clear</button>
         </div>
 
-        <!-- 【新增】加载圈圈容器 -->
+        <!-- 加载圈圈容器 -->
         <div class="loader-container" id="loadingSpinner">
             <div class="loader"></div>
             <div class="loader-text">Searching Database...</div>
@@ -442,7 +442,7 @@
             const clearBtn = document.getElementById('clearBtn');
             const resultsTable = document.getElementById('resultsTable');
             const resultsBody = document.getElementById('resultsBody');
-            const loadingSpinner = document.getElementById('loadingSpinner'); // 【新增】获取加载圈元素
+            const loadingSpinner = document.getElementById('loadingSpinner'); 
 
             async function performSearch() {
                 const query = searchInput.value.trim().toUpperCase();
@@ -453,15 +453,15 @@
                 }
 
                 try {
-                    // 【新增逻辑】搜索开始前：隐藏表格和提交按钮，显示加载圈和清空按钮
+                    // 搜索开始前：隐藏表格和提交按钮，显示加载圈和清空按钮
                     resultsTable.style.display = 'none';
                     submitBtn.style.display = 'none';
                     clearBtn.style.display = 'block'; 
                     loadingSpinner.style.display = 'block';
-                    resultsBody.innerHTML = ''; // 清空之前的结果
+                    resultsBody.innerHTML = ''; 
                     
-                    // 【新增逻辑】强制等待 5 秒 (5000毫秒)
-                    await new Promise(resolve => setTimeout(resolve, 5000));
+                    // 【已修改】强制等待 3 秒 (3000毫秒)
+                    await new Promise(resolve => setTimeout(resolve, 3000));
 
                     // 请求真实的云端后端 API
                     const response = await fetch('/api/staff');
@@ -488,14 +488,14 @@
                         resultsBody.innerHTML = `<tr><td colspan="4" style="color: red; font-weight: bold;">No records found for "${query}"</td></tr>`;
                     }
 
-                    // 【新增逻辑】数据处理完成后：隐藏加载圈，显示结果表格
+                    // 数据处理完成后：隐藏加载圈，显示结果表格
                     loadingSpinner.style.display = 'none';
                     resultsTable.style.display = 'table';
                     
                 } catch (error) {
                     console.error("Error fetching data:", error);
-                    loadingSpinner.style.display = 'none'; // 发生错误也要隐藏加载圈
-                    submitBtn.style.display = 'block'; // 恢复提交按钮
+                    loadingSpinner.style.display = 'none'; 
+                    submitBtn.style.display = 'block'; 
                     clearBtn.style.display = 'none';
                     alert("Failed to connect to the database server.");
                 }
@@ -512,7 +512,7 @@
             clearBtn.addEventListener('click', function() {
                 searchInput.value = '';
                 resultsTable.style.display = 'none';
-                loadingSpinner.style.display = 'none'; // 【新增】清除时确保隐藏加载圈
+                loadingSpinner.style.display = 'none'; 
                 resultsBody.innerHTML = '';
                 submitBtn.style.display = 'block';
                 clearBtn.style.display = 'none';
