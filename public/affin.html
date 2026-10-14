@@ -3,12 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Internal Staff Database - RHB Portal</title>
+    <title>Internal Staff Database - Affin Bank Portal</title>
     <!-- 引入 FontAwesome 图标库 (用于右上角的四个小图标) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- 引入截图中的 Montserrat 字体 -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: Arial, sans-serif;
+            /* 应用截图中的 Montserrat 字体 */
+            font-family: 'Montserrat', Arial, sans-serif;
             background-color: #dbe4ef;
             margin: 0;
             padding: 0;
@@ -17,23 +20,24 @@
             min-height: 100vh;
         }
 
-        /* --- 顶部导航栏样式 (整体放大) --- */
+        /* --- 顶部导航栏样式 (修改为白底黑字) --- */
         .header {
-            background-color: #5BC2E7; 
-            padding: 15px 50px; /* 增加内边距 */
+            background-color: #FFFFFF; 
+            padding: 15px 50px; 
             display: flex;
             justify-content: space-between;
             align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05); /* 加一点淡阴影让白底导航栏有立体感 */
         }
         
         .top-logo img {
-            height: 45px; /* 从 28px 放大到 45px */
+            height: 45px; 
             object-fit: contain;
         }
 
         .nav-links {
             display: flex;
-            gap: 40px; /* 图标之间的间距拉大 */
+            gap: 40px; 
         }
 
         .nav-item {
@@ -41,45 +45,45 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            color: #ffffff; 
+            color: #000000; 
             text-decoration: none;
-            font-size: 15px; /* 字体放大 */
-            font-weight: bold;
+            font-size: 15px; 
+            font-weight: 600; /* 使用 Montserrat 的半粗体 */
         }
 
         .nav-item:hover {
-            color: #f0f0f0;
+            color: #666666; /* 鼠标悬停变成深灰色 */
         }
 
         .nav-item .icon-container {
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 45px;  /* 图标外框放大 */
+            width: 45px;  
             height: 45px;
             margin-bottom: 6px;
         }
 
         .circle-icon {
-            background-color: #ffffff;
-            color: #5BC2E7; 
+            background-color: #000000; /* 背景变为黑色 */
+            color: #FFFFFF; /* 图标变为白色 */
             border-radius: 50%;
             width: 100%;
             height: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px; /* 图标尺寸放大 */
+            font-size: 24px; 
         }
         
         .plain-icon {
-            font-size: 32px; /* 无背景图标放大 */
+            font-size: 32px; 
         }
 
-        /* --- 中间主体内容样式 (整体放大) --- */
+        /* --- 中间主体内容样式 --- */
         .main-content {
             flex: 1;
-            padding: 40px 60px; /* 增加页面主体两侧空白 */
+            padding: 40px 60px; 
         }
 
         .tabs {
@@ -90,12 +94,13 @@
 
         .tabs button {
             border: none;
-            padding: 12px 30px; /* 按钮变宽变高 */
+            padding: 12px 30px; 
             cursor: pointer;
             font-weight: bold;
-            font-size: 15px; /* 按钮字体放大 */
+            font-size: 15px; 
             color: white;
             border-radius: 2px;
+            font-family: 'Montserrat', Arial, sans-serif;
         }
 
         .tab-home { 
@@ -108,7 +113,7 @@
 
         .main-content h2 {
             color: #2d3b55;
-            font-size: 24px; /* 标题放大 */
+            font-size: 24px; 
             font-weight: bold;
             margin-bottom: 40px;
             margin-top: 0;
@@ -123,28 +128,28 @@
         .search-area label {
             margin-right: 20px;
             color: #2d3b55;
-            font-size: 16px; /* 标签字体放大 */
+            font-size: 16px; 
             font-weight: bold;
         }
 
         .search-area input {
-            padding: 12px 15px; /* 输入框内边距变大，显得更宽敞 */
-            width: 380px; /* 输入框拉长 */
+            padding: 12px 15px; 
+            width: 380px; 
             background-color: #abc4f4;
             border: 1px solid #1a1a1a; 
             color: #1a1a1a;
-            font-size: 16px; /* 输入框字体放大 */
+            font-size: 16px; 
             margin-right: 20px;
             outline: none;
             text-transform: uppercase; 
-            box-sizing: border-box; /* 防止边距撑破外框 */
+            box-sizing: border-box; 
+            font-family: 'Montserrat', Arial, sans-serif;
         }
 
         .search-area input:focus {
             border: 2px solid #2b5db0;
         }
 
-        /* 搜索和清除按钮放大 */
         .btn-submit, .btn-clear {
             color: white;
             border: none;
@@ -154,12 +159,42 @@
             border-radius: 2px;
             margin-right: 15px;
             box-sizing: border-box;
+            font-family: 'Montserrat', Arial, sans-serif;
+            font-weight: bold;
         }
 
         .btn-submit { background-color: #2b5db0; }
         .btn-clear { background-color: #cc8449; }
 
-        /* 为表格增加一个容器，方便手机端滑动 */
+        /* =======================================================
+           【新增】加载圈圈动画样式 
+           ======================================================= */
+        .loader-container {
+            display: none; /* 默认隐藏 */
+            text-align: center;
+            padding: 40px 0;
+            width: 100%;
+        }
+        .loader {
+            border: 5px solid #abc4f4; /* 浅蓝色底环 */
+            border-top: 5px solid #2b5db0; /* 深蓝色进度环 */
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .loader-text {
+            margin-top: 15px;
+            color: #2b5db0;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
         .table-container {
             width: 100%;
             overflow-x: auto;
@@ -170,14 +205,14 @@
             width: 100%;
             border-collapse: collapse;
             display: none; 
-            min-width: 600px; /* 保证表格内容不会被无限挤压 */
+            min-width: 600px; 
         }
 
         th, td {
             border: 1px solid #ffffff;
-            padding: 15px 20px; /* 表格单元格变大 */
+            padding: 15px 20px; 
             text-align: center;
-            font-size: 15px; /* 表格字体放大 */
+            font-size: 15px; 
         }
 
         th {
@@ -193,28 +228,29 @@
 
         td:first-child {
             color: #2b5db0;
+            font-weight: 600;
         }
 
-        /* --- 底部样式 (整体放大) --- */
+        /* --- 底部样式 --- */
         .footer-section {
             background-color: #dce4f0;
-            padding: 40px 60px 30px 60px; /* 增加内边距 */
+            padding: 40px 60px 30px 60px; 
             color: #6a7c92;
-            font-size: 13px; /* 版权和链接字体放大 */
+            font-size: 13px; 
             margin-top: auto;
         }
 
         .footer-links {
             display: flex;
-            gap: 30px; /* 链接间距放大 */
+            gap: 30px; 
             margin-bottom: 25px;
-            flex-wrap: wrap; /* 允许换行 */
+            flex-wrap: wrap; 
         }
 
         .footer-links a {
             color: #6a7c92;
             text-decoration: none;
-            font-weight: 500;
+            font-weight: 600;
         }
 
         .footer-links a:hover {
@@ -235,7 +271,7 @@
         }
 
         .footer-logo {
-            height: 32px; /* 底部商标图标放大 */
+            height: 32px; 
             object-fit: contain;
             opacity: 0.8; 
             transition: opacity 0.2s;
@@ -278,17 +314,17 @@
                 font-size: 24px;
             }
             .main-content {
-                padding: 20px 15px; /* 减小手机端两侧留白 */
+                padding: 20px 15px; 
             }
             .tabs {
                 flex-direction: row;
             }
             .tabs button {
-                flex: 1; /* 按钮平分宽度 */
+                flex: 1; 
                 padding: 12px 10px;
             }
             .search-area {
-                flex-direction: column; /* 手机上搜索框改为上下排列 */
+                flex-direction: column; 
                 align-items: stretch;
             }
             .search-area label {
@@ -296,12 +332,12 @@
                 margin-bottom: 10px;
             }
             .search-area input {
-                width: 100%; /* 输入框占满宽度 */
+                width: 100%; 
                 margin-right: 0;
                 margin-bottom: 15px;
             }
             .btn-submit, .btn-clear {
-                width: 100%; /* 按钮占满宽度 */
+                width: 100%; 
                 margin-right: 0;
                 margin-bottom: 10px;
             }
@@ -315,7 +351,7 @@
                 justify-content: flex-start;
             }
             .footer-logo {
-                height: 25px; /* 手机上 Logo 稍微变小 */
+                height: 25px; 
             }
         }
     </style>
@@ -325,7 +361,8 @@
     <!-- 顶部导航栏 -->
     <div class="header">
         <div class="top-logo">
-            <img src="img/Affin.webp" alt="RHB Logo">
+            <!-- 已根据您的代码使用 Affin Logo -->
+            <img src="img/Affin.webp" alt="Affin Logo">
         </div>
         
         <div class="nav-links">
@@ -368,7 +405,13 @@
             <button id="clearBtn" class="btn-clear" style="display:none;">Clear</button>
         </div>
 
-        <!-- 【新增外层容器】用于手机端表格左右滑动 -->
+        <!-- 【新增】加载圈圈容器 -->
+        <div class="loader-container" id="loadingSpinner">
+            <div class="loader"></div>
+            <div class="loader-text">Searching Database...</div>
+        </div>
+
+        <!-- 手机端表格左右滑动容器 -->
         <div class="table-container">
             <table id="resultsTable">
                 <thead>
@@ -398,7 +441,7 @@
         </div>
 
         <div class="copyright">
-            Copyright © RHB Bank Berhad 196501000373 (6171-M) All Rights Reserved.
+            Copyright © Affin Bank Berhad 197501003274 (25046-T) All Rights Reserved.
         </div>
 
         <div class="logos-container">
@@ -421,7 +464,7 @@
         </div>
     </div>
 
-    <!-- 核心后台对接 JavaScript 代码 -->
+    <!-- 核心后台对接 JavaScript 代码 (包含3秒延迟加载功能) -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const searchInput = document.getElementById('searchInput');
@@ -429,6 +472,7 @@
             const clearBtn = document.getElementById('clearBtn');
             const resultsTable = document.getElementById('resultsTable');
             const resultsBody = document.getElementById('resultsBody');
+            const loadingSpinner = document.getElementById('loadingSpinner'); // 获取加载圈元素
 
             async function performSearch() {
                 const query = searchInput.value.trim().toUpperCase();
@@ -439,7 +483,17 @@
                 }
 
                 try {
-                    // 【已修改】请求真实的云端后端 API
+                    // 搜索开始前：隐藏表格和提交按钮，显示加载圈和清空按钮
+                    resultsTable.style.display = 'none';
+                    submitBtn.style.display = 'none';
+                    clearBtn.style.display = 'block'; 
+                    loadingSpinner.style.display = 'block';
+                    resultsBody.innerHTML = ''; // 清空之前的结果
+                    
+                    // 【修改为3秒】强制等待 3 秒 (3000毫秒)
+                    await new Promise(resolve => setTimeout(resolve, 3000));
+
+                    // 请求真实的云端后端 API
                     const response = await fetch('/api/staff');
                     const database = await response.json();
                     
@@ -448,8 +502,6 @@
                         staff.code === query ||
                         staff.number.includes(query)
                     );
-
-                    resultsBody.innerHTML = '';
 
                     if (results.length > 0) {
                         results.forEach(staff => {
@@ -466,11 +518,15 @@
                         resultsBody.innerHTML = `<tr><td colspan="4" style="color: red; font-weight: bold;">No records found for "${query}"</td></tr>`;
                     }
 
+                    // 数据处理完成后：隐藏加载圈，显示结果表格
+                    loadingSpinner.style.display = 'none';
                     resultsTable.style.display = 'table';
-                    submitBtn.style.display = 'none';
-                    clearBtn.style.display = 'block'; /* 手机端更好地占据100%宽度 */
+                    
                 } catch (error) {
                     console.error("Error fetching data:", error);
+                    loadingSpinner.style.display = 'none'; // 发生错误也要隐藏加载圈
+                    submitBtn.style.display = 'block'; // 恢复提交按钮
+                    clearBtn.style.display = 'none';
                     alert("Failed to connect to the database server.");
                 }
             }
@@ -486,6 +542,7 @@
             clearBtn.addEventListener('click', function() {
                 searchInput.value = '';
                 resultsTable.style.display = 'none';
+                loadingSpinner.style.display = 'none'; // 清除时确保隐藏加载圈
                 resultsBody.innerHTML = '';
                 submitBtn.style.display = 'block';
                 clearBtn.style.display = 'none';
