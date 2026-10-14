@@ -16,7 +16,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // 1. 连接 MongoDB 数据库
 // ==========================================
 // ⚠️ 注意：请一定要把下面代码里的 “您的真实数据库密码” 这几个中文字，替换成您当时设置的密码！
-const mongoURI = process.env.MONGODB_URI || "mongodb+srv://g41580387_db_user:<db_password>@cluster0.mwlsnzl.mongodb.net/?appName=Cluster0";
+const mongoURI = process.env.MONGODB_URI || "mongodb+srv://g41580387_db_user:<1234567890>@cluster0.mwlsnzl.mongodb.net/?appName=Cluster0";
 
 mongoose.connect(mongoURI)
     .then(() => console.log('✅ MongoDB Cloud Database connected perfectly!'))
