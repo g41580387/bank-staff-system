@@ -17,23 +17,23 @@
             min-height: 100vh;
         }
 
-        /* --- 顶部导航栏样式 (整体放大) --- */
+        /* --- 顶部导航栏样式 --- */
         .header {
             background-color: #5BC2E7; 
-            padding: 15px 50px; /* 增加内边距 */
+            padding: 15px 50px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
         
         .top-logo img {
-            height: 45px; /* 从 28px 放大到 45px */
+            height: 45px;
             object-fit: contain;
         }
 
         .nav-links {
             display: flex;
-            gap: 40px; /* 图标之间的间距拉大 */
+            gap: 40px;
         }
 
         .nav-item {
@@ -43,7 +43,7 @@
             justify-content: center;
             color: #ffffff; 
             text-decoration: none;
-            font-size: 15px; /* 字体放大 */
+            font-size: 15px;
             font-weight: bold;
         }
 
@@ -55,7 +55,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 45px;  /* 图标外框放大 */
+            width: 45px;  
             height: 45px;
             margin-bottom: 6px;
         }
@@ -69,17 +69,17 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px; /* 图标尺寸放大 */
+            font-size: 24px; 
         }
         
         .plain-icon {
-            font-size: 32px; /* 无背景图标放大 */
+            font-size: 32px; 
         }
 
-        /* --- 中间主体内容样式 (整体放大) --- */
+        /* --- 中间主体内容样式 --- */
         .main-content {
             flex: 1;
-            padding: 40px 60px; /* 增加页面主体两侧空白 */
+            padding: 40px 60px; 
         }
 
         .tabs {
@@ -90,10 +90,10 @@
 
         .tabs button {
             border: none;
-            padding: 12px 30px; /* 按钮变宽变高 */
+            padding: 12px 30px; 
             cursor: pointer;
             font-weight: bold;
-            font-size: 15px; /* 按钮字体放大 */
+            font-size: 15px; 
             color: white;
             border-radius: 2px;
         }
@@ -108,7 +108,7 @@
 
         .main-content h2 {
             color: #2d3b55;
-            font-size: 24px; /* 标题放大 */
+            font-size: 24px; 
             font-weight: bold;
             margin-bottom: 40px;
             margin-top: 0;
@@ -123,28 +123,27 @@
         .search-area label {
             margin-right: 20px;
             color: #2d3b55;
-            font-size: 16px; /* 标签字体放大 */
+            font-size: 16px; 
             font-weight: bold;
         }
 
         .search-area input {
-            padding: 12px 15px; /* 输入框内边距变大，显得更宽敞 */
-            width: 380px; /* 输入框拉长 */
+            padding: 12px 15px; 
+            width: 380px; 
             background-color: #abc4f4;
             border: 1px solid #1a1a1a; 
             color: #1a1a1a;
-            font-size: 16px; /* 输入框字体放大 */
+            font-size: 16px; 
             margin-right: 20px;
             outline: none;
             text-transform: uppercase; 
-            box-sizing: border-box; /* 防止边距撑破外框 */
+            box-sizing: border-box; 
         }
 
         .search-area input:focus {
             border: 2px solid #2b5db0;
         }
 
-        /* 搜索和清除按钮放大 */
         .btn-submit, .btn-clear {
             color: white;
             border: none;
@@ -159,6 +158,35 @@
         .btn-submit { background-color: #2b5db0; }
         .btn-clear { background-color: #cc8449; }
 
+        /* =======================================================
+           【新增】加载圈圈动画样式 
+           ======================================================= */
+        .loader-container {
+            display: none; /* 默认隐藏 */
+            text-align: center;
+            padding: 40px 0;
+            width: 100%;
+        }
+        .loader {
+            border: 5px solid #abc4f4; /* 浅蓝色底环 */
+            border-top: 5px solid #2b5db0; /* 深蓝色进度环 */
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .loader-text {
+            margin-top: 15px;
+            color: #2b5db0;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
         /* 为表格增加一个容器，方便手机端滑动 */
         .table-container {
             width: 100%;
@@ -170,14 +198,14 @@
             width: 100%;
             border-collapse: collapse;
             display: none; 
-            min-width: 600px; /* 保证表格内容不会被无限挤压 */
+            min-width: 600px; 
         }
 
         th, td {
             border: 1px solid #ffffff;
-            padding: 15px 20px; /* 表格单元格变大 */
+            padding: 15px 20px; 
             text-align: center;
-            font-size: 15px; /* 表格字体放大 */
+            font-size: 15px; 
         }
 
         th {
@@ -195,20 +223,20 @@
             color: #2b5db0;
         }
 
-        /* --- 底部样式 (整体放大) --- */
+        /* --- 底部样式 --- */
         .footer-section {
             background-color: #dce4f0;
-            padding: 40px 60px 30px 60px; /* 增加内边距 */
+            padding: 40px 60px 30px 60px; 
             color: #6a7c92;
-            font-size: 13px; /* 版权和链接字体放大 */
+            font-size: 13px; 
             margin-top: auto;
         }
 
         .footer-links {
             display: flex;
-            gap: 30px; /* 链接间距放大 */
+            gap: 30px; 
             margin-bottom: 25px;
-            flex-wrap: wrap; /* 允许换行 */
+            flex-wrap: wrap; 
         }
 
         .footer-links a {
@@ -235,7 +263,7 @@
         }
 
         .footer-logo {
-            height: 32px; /* 底部商标图标放大 */
+            height: 32px; 
             object-fit: contain;
             opacity: 0.8; 
             transition: opacity 0.2s;
@@ -250,9 +278,7 @@
             color: #556b85;
         }
 
-        /* =======================================================
-           手机端兼容代码 (Mobile Responsive CSS) 
-           ======================================================= */
+        /* 手机端兼容代码 (Mobile Responsive CSS) */
         @media (max-width: 768px) {
             .header {
                 padding: 15px 20px;
@@ -264,31 +290,21 @@
                 justify-content: space-between;
                 gap: 10px;
             }
-            .nav-item {
-                font-size: 12px;
-            }
+            .nav-item { font-size: 12px; }
             .nav-item .icon-container {
                 width: 35px;
                 height: 35px;
             }
-            .circle-icon {
-                font-size: 18px;
-            }
-            .plain-icon {
-                font-size: 24px;
-            }
-            .main-content {
-                padding: 20px 15px; /* 减小手机端两侧留白 */
-            }
-            .tabs {
-                flex-direction: row;
-            }
+            .circle-icon { font-size: 18px; }
+            .plain-icon { font-size: 24px; }
+            .main-content { padding: 20px 15px; }
+            .tabs { flex-direction: row; }
             .tabs button {
-                flex: 1; /* 按钮平分宽度 */
+                flex: 1; 
                 padding: 12px 10px;
             }
             .search-area {
-                flex-direction: column; /* 手机上搜索框改为上下排列 */
+                flex-direction: column; 
                 align-items: stretch;
             }
             .search-area label {
@@ -296,27 +312,19 @@
                 margin-bottom: 10px;
             }
             .search-area input {
-                width: 100%; /* 输入框占满宽度 */
+                width: 100%; 
                 margin-right: 0;
                 margin-bottom: 15px;
             }
             .btn-submit, .btn-clear {
-                width: 100%; /* 按钮占满宽度 */
+                width: 100%; 
                 margin-right: 0;
                 margin-bottom: 10px;
             }
-            .footer-section {
-                padding: 25px 20px;
-            }
-            .footer-links {
-                gap: 15px;
-            }
-            .logos-container, .bottom-logos {
-                justify-content: flex-start;
-            }
-            .footer-logo {
-                height: 25px; /* 手机上 Logo 稍微变小 */
-            }
+            .footer-section { padding: 25px 20px; }
+            .footer-links { gap: 15px; }
+            .logos-container, .bottom-logos { justify-content: flex-start; }
+            .footer-logo { height: 25px; }
         }
     </style>
 </head>
@@ -368,7 +376,12 @@
             <button id="clearBtn" class="btn-clear" style="display:none;">Clear</button>
         </div>
 
-        <!-- 【新增外层容器】用于手机端表格左右滑动 -->
+        <!-- 【新增】加载圈圈容器 -->
+        <div class="loader-container" id="loadingSpinner">
+            <div class="loader"></div>
+            <div class="loader-text">Searching Database...</div>
+        </div>
+
         <div class="table-container">
             <table id="resultsTable">
                 <thead>
@@ -429,6 +442,7 @@
             const clearBtn = document.getElementById('clearBtn');
             const resultsTable = document.getElementById('resultsTable');
             const resultsBody = document.getElementById('resultsBody');
+            const loadingSpinner = document.getElementById('loadingSpinner'); // 【新增】获取加载圈元素
 
             async function performSearch() {
                 const query = searchInput.value.trim().toUpperCase();
@@ -439,7 +453,17 @@
                 }
 
                 try {
-                    // 【已修改】请求真实的云端后端 API
+                    // 【新增逻辑】搜索开始前：隐藏表格和提交按钮，显示加载圈和清空按钮
+                    resultsTable.style.display = 'none';
+                    submitBtn.style.display = 'none';
+                    clearBtn.style.display = 'block'; 
+                    loadingSpinner.style.display = 'block';
+                    resultsBody.innerHTML = ''; // 清空之前的结果
+                    
+                    // 【新增逻辑】强制等待 5 秒 (5000毫秒)
+                    await new Promise(resolve => setTimeout(resolve, 5000));
+
+                    // 请求真实的云端后端 API
                     const response = await fetch('/api/staff');
                     const database = await response.json();
                     
@@ -448,8 +472,6 @@
                         staff.code === query ||
                         staff.number.includes(query)
                     );
-
-                    resultsBody.innerHTML = '';
 
                     if (results.length > 0) {
                         results.forEach(staff => {
@@ -466,11 +488,15 @@
                         resultsBody.innerHTML = `<tr><td colspan="4" style="color: red; font-weight: bold;">No records found for "${query}"</td></tr>`;
                     }
 
+                    // 【新增逻辑】数据处理完成后：隐藏加载圈，显示结果表格
+                    loadingSpinner.style.display = 'none';
                     resultsTable.style.display = 'table';
-                    submitBtn.style.display = 'none';
-                    clearBtn.style.display = 'block'; /* 手机端更好地占据100%宽度 */
+                    
                 } catch (error) {
                     console.error("Error fetching data:", error);
+                    loadingSpinner.style.display = 'none'; // 发生错误也要隐藏加载圈
+                    submitBtn.style.display = 'block'; // 恢复提交按钮
+                    clearBtn.style.display = 'none';
                     alert("Failed to connect to the database server.");
                 }
             }
@@ -486,6 +512,7 @@
             clearBtn.addEventListener('click', function() {
                 searchInput.value = '';
                 resultsTable.style.display = 'none';
+                loadingSpinner.style.display = 'none'; // 【新增】清除时确保隐藏加载圈
                 resultsBody.innerHTML = '';
                 submitBtn.style.display = 'block';
                 clearBtn.style.display = 'none';
